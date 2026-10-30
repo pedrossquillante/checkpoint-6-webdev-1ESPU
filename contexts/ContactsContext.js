@@ -11,17 +11,19 @@ import contactsApi from "../services/contactsApi";
 
 const ContactsContext = createContext();
 
-export const useContactsContext = () => {
-    const context = useContext(ContactsContext);
-    if (!context) {
-        throw new Error(
-            "useContactsContext deve ser usado dentro de ContactsProvider"
-        );
-    }
-    return context;
-};
 
 export const ContactsProvider = ({ children }) => {
+
+    useContactsContext = () => {
+        const context = useContext(ContactsContext);
+        if (!context) {
+            throw new Error(
+                "useContactsContext deve ser usado dentro de ContactsProvider"
+            );
+        }
+        return context;
+    };
+
     const [contacts, setContacts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
